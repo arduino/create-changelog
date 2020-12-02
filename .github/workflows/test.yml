@@ -3,30 +3,46 @@ name: Test Action
 on: [push, pull_request]
 
 jobs:
-  test:
-    runs-on: ${{ matrix.operating-system }}
-
-    env:
-      GITHUB_TOKEN: ${{ github.token }}
-
-    strategy:
-      matrix:
-        operating-system: [ubuntu-latest, windows-latest]
+  lint:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set Node.js 10.x
+      - name: Set Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          node-version: 10.x
+          node-version: 12.x
 
       - name: npm install
         run: npm install
 
       - name: npm lint
         run: npm run check
+
+  test:
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.operating-system }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: npm install
+        run: npm install
+
+      - name: Init Git credentials to run tests
+        run: |
+          git config --global user.email "me@example.com"
+          git config --global user.name "Me Example"
 
       - name: npm test
         run: npm test

@@ -1,4 +1,3 @@
-import * as io from '@actions/io'
 import * as exec from '@actions/exec'
 import {Settings} from './settings'
 
@@ -70,6 +69,10 @@ export class Git {
       const split = commit.split(' ')
       const hash = split[0]
       const message = split.slice(1).join(' ')
+
+      if (this.settings.filterRegex && RegExp(this.settings.filterRegex).test(message)) {
+        return
+      }
       commits.push(new GitCommit(hash, message))
     })
 

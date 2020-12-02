@@ -244,4 +244,30 @@ describe('Git commands', () => {
     expect(log[2].hash).toHaveLength(7)
     expect(log[2].message).toBe('Third commit')
   })
+
+  it('Verifies log does not contain commits matching regex', async () => {
+    const cwd = await initTestRepo()
+
+    const settings = {} as Settings
+    settings.gitPath = await io.which('git', true)
+    settings.repoPath = cwd
+    settings.filterRegex = /^\[skip\].*/
+    const g = new Git(settings)
+
+    await createAndCommitFile('first', 'First commit', cwd)
+    await createAndCommitFile('second', '[skip] Second commit', cwd)
+    await createAndCommitFile('third', 'Third commit', cwd)
+    await createAndCommitFile('fourth', 'Fourth commit', cwd)
+    await createAndCommitFile('fifth', '[skip] Fifth commit', cwd)
+    await createAndCommitFile('sixth', '[skip] Sixth commit', cwd)
+
+    const log = await g.log('', '')
+    expect(log).toHaveLength(3)
+    expect(log[0].hash).toHaveLength(7)
+    expect(log[0].message).toBe('Fourth commit')
+    expect(log[1].hash).toHaveLength(7)
+    expect(log[1].message).toBe('Third commit')
+    expect(log[2].hash).toHaveLength(7)
+    expect(log[2].message).toBe('First commit')
+  })
 })

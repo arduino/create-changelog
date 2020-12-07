@@ -68,7 +68,7 @@ export class Git {
     res.stdout.forEach(commit => {
       const split = commit.split(' ')
       const hash = split[0]
-      const message = split.slice(1).join(' ')
+      const message = split.slice(1).join(' ').trim()
 
       if (this.settings.filterRegex && RegExp(this.settings.filterRegex).test(message)) {
         return
@@ -109,7 +109,7 @@ class GitOutput {
   exitCode = 0
 }
 
-class GitCommit {
+export class GitCommit {
   hash: string = ''
   message: string = ''
 

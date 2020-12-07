@@ -1,6 +1,5 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import * as io from '@actions/io'
 import {Settings} from './settings'
 import {GitCommit} from './git'
 
@@ -20,7 +19,7 @@ export class Changelog {
 
     const changelogDir: string = path.parse(this.settings.changelogFilePath).dir
     if (!fs.existsSync(changelogDir)) {
-      io.mkdirP(changelogDir)
+      fs.mkdirSync(changelogDir)
     }
 
     fs.writeFileSync(this.settings.changelogFilePath, lines.join('\n'))

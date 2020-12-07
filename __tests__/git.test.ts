@@ -2,12 +2,10 @@ import * as exec from '@actions/exec'
 import * as uuid from 'uuid'
 import * as io from '@actions/io'
 import * as path from 'path'
-import * as os from 'os'
 import * as fs from 'fs'
 import {Git} from '../src/git'
 import {Settings} from '../src/settings'
-
-const testDir = path.join(os.tmpdir(), 'test-create-changelog')
+import {TEST_DIR} from './common'
 
 async function runGit(args: string[], cwd: string) {
   const gitPath = await io.which('git', true)
@@ -15,7 +13,7 @@ async function runGit(args: string[], cwd: string) {
 }
 
 async function initTestRepo(): Promise<string> {
-  const cwd = path.join(testDir, uuid.v4())
+  const cwd = path.join(TEST_DIR, uuid.v4())
   await io.mkdirP(cwd)
   await runGit(['init', '.'], cwd)
   return cwd
@@ -34,7 +32,7 @@ async function createAndCommitFile(name: string, message: string, cwd: string) {
 
 describe('Git commands', () => {
   afterAll(() => {
-    io.rmRF(testDir)
+    io.rmRF(TEST_DIR)
   })
 
   it('Verifies tag is returned if checked out on same commit', async () => {

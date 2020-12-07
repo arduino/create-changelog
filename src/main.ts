@@ -1,15 +1,21 @@
 import * as core from '@actions/core'
 import * as io from '@actions/io'
-import {Settings} from './settings'
+import {Changelog} from './changelog'
+import {Git} from './git'
+import {initSettings, Settings} from './settings'
 
 async function run(): Promise<void> {
   try {
-    const settings = {} as Settings
-    settings.gitPath = await io.which('git', true)
-    settings.repoPath = core.getInput('path') || '.'
-    settings.tagRegex = core.getInput('tag-regex') || ''
-    settings.filterRegex = core.getInput('filter-regex') || ''
-    settings.changelogFilePath = core.getInput('changelog_file_path') || ''
+    const settings = await initSettings()
+
+    const g = new Git(settings)
+    const to = await g.currentTag()
+    const from = await g.previousTag(to)
+
+    const log = await g.log(from, to)
+
+    const changelog = new Changelog(settings)
+    await changelog.write(log)
   } catch (error) {
     core.setFailed(error.message)
   }

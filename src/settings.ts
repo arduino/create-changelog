@@ -2,10 +2,13 @@ import * as core from '@actions/core'
 import * as io from '@actions/io'
 
 export interface Settings {
-  // TODO: DOCS
+  // Path to git executable
   gitPath: string
+  // Regex to select git tags used as boundaries for the changelog
   tagRegex: string | RegExp
+  // Regex to filter out commit messages from the changelog
   filterRegex: string | RegExp
+  // Destination file of the generated changelog
   changelogFilePath: string
 }
 

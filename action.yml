@@ -1,9 +1,19 @@
-name: "Create changelog"
-description: "Generates a changelog from a Git repository commit history."
-author: "Arduino"
+name: 'Create changelog'
+description: 'Generates a changelog from a Git repository commit history.'
+author: 'Arduino'
 runs:
-  using: "node12"
-  main: "dist/index.js"
+  using: 'node12'
+  main: 'dist/index.js'
 branding:
-  icon: "list"
-  color: "blue"
+  icon: 'list'
+  color: 'blue'
+inputs:
+  tag-regex:
+    description: 'Regex to select git tags used as boundaries for the changelog.'
+    default: ''
+  filter-regex:
+    description: 'Regex to filter out commit messages from the changelog.'
+    default: ''
+  changelog-file-path:
+    description: 'Destination file of the generated changelog.'
+    default: 'CHANGELOG.md'

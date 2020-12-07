@@ -37,10 +37,10 @@ describe('Git commands', () => {
 
   it('Verifies tag is returned if checked out on same commit', async () => {
     const cwd = await initTestRepo()
+    process.chdir(cwd)
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.repoPath = cwd
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
@@ -52,10 +52,10 @@ describe('Git commands', () => {
 
   it('Verifies empty string is returned if no tag exists', async () => {
     const cwd = await initTestRepo()
+    process.chdir(cwd)
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.repoPath = cwd
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
@@ -66,10 +66,10 @@ describe('Git commands', () => {
 
   it('Verifies empty string is returned if current tag does not match regex', async () => {
     const cwd = await initTestRepo()
+    process.chdir(cwd)
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.repoPath = cwd
     settings.tagRegex = /[0-9]+\.[0-9]+\.[0-9]+.*/
     const g = new Git(settings)
 
@@ -82,10 +82,10 @@ describe('Git commands', () => {
 
   it('Verifies tag is returned if regex is matched', async () => {
     const cwd = await initTestRepo()
+    process.chdir(cwd)
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.repoPath = cwd
     settings.tagRegex = /[0-9]+\.[0-9]+\.[0-9]+.*/
     const g = new Git(settings)
 
@@ -98,10 +98,10 @@ describe('Git commands', () => {
 
   it('Verifies previous tag is returned', async () => {
     const cwd = await initTestRepo()
+    process.chdir(cwd)
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.repoPath = cwd
     settings.tagRegex = ''
     const g = new Git(settings)
 
@@ -116,10 +116,10 @@ describe('Git commands', () => {
 
   it('Verifies empty string is returned if no previous tag matches regex', async () => {
     const cwd = await initTestRepo()
+    process.chdir(cwd)
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.repoPath = cwd
     settings.tagRegex = /[0-9]+\.[0-9]+\.[0-9]+.*/
     const g = new Git(settings)
 
@@ -134,10 +134,10 @@ describe('Git commands', () => {
 
   it('Verifies previous matching tag is found with invalid tag inbetween', async () => {
     const cwd = await initTestRepo()
+    process.chdir(cwd)
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.repoPath = cwd
     settings.tagRegex = /[0-9]+\.[0-9]+\.[0-9]+.*/
     const g = new Git(settings)
 
@@ -154,10 +154,10 @@ describe('Git commands', () => {
 
   it('Verifies all commits are returned when no refs are specified', async () => {
     const cwd = await initTestRepo()
+    process.chdir(cwd)
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.repoPath = cwd
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
@@ -176,10 +176,10 @@ describe('Git commands', () => {
 
   it('Verifies log if from ref is specified', async () => {
     const cwd = await initTestRepo()
+    process.chdir(cwd)
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.repoPath = cwd
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
@@ -197,10 +197,10 @@ describe('Git commands', () => {
 
   it('Verifies log if to ref is specified', async () => {
     const cwd = await initTestRepo()
+    process.chdir(cwd)
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.repoPath = cwd
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
@@ -218,10 +218,10 @@ describe('Git commands', () => {
 
   it('Verifies log with from and to refs specified', async () => {
     const cwd = await initTestRepo()
+    process.chdir(cwd)
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.repoPath = cwd
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
@@ -245,10 +245,10 @@ describe('Git commands', () => {
 
   it('Verifies log does not contain commits matching regex', async () => {
     const cwd = await initTestRepo()
+    process.chdir(cwd)
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.repoPath = cwd
     settings.filterRegex = /^\[skip\].*/
     const g = new Git(settings)
 

@@ -87,7 +87,7 @@ export class Git {
 
     const result = new GitOutput()
     const options = {
-      cwd: this.settings.repoPath,
+      cwd: process.cwd(),
       env,
       ignoreReturnCode: true,
       listeners: {

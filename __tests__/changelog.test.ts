@@ -4,7 +4,7 @@ import * as fs from 'fs'
 import {Settings} from '../src/settings'
 import {Changelog} from '../src/changelog'
 import {GitCommit} from '../src/git'
-import {TEST_DIR} from './common'
+import {TEST_DIR} from './common.test.utils'
 
 describe('Changelog', () => {
   afterAll(() => {

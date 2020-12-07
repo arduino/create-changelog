@@ -5,7 +5,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import {Git} from '../src/git'
 import {Settings} from '../src/settings'
-import {TEST_DIR} from './common'
+import {TEST_DIR} from './common.test.utils'
 
 async function runGit(args: string[], cwd: string) {
   const gitPath = await io.which('git', true)

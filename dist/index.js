@@ -100,7 +100,7 @@ class Git {
             // In case there are multiple tags get the first valid version tag
             if (this.settings.tagRegex) {
                 res.stdout.forEach(tag => {
-                    if (RegExp(this.settings.tagRegex).test(tag)) {
+                    if (this.settings.tagRegex.test(tag)) {
                         return tag;
                     }
                 });
@@ -120,7 +120,7 @@ class Git {
             }
             if (this.settings.tagRegex) {
                 const foundTag = res.stdout[0];
-                if (!RegExp(this.settings.tagRegex).test(foundTag)) {
+                if (!this.settings.tagRegex.test(foundTag)) {
                     // If previous tag doesn't match the regex keep searching back
                     return this.previousTag(foundTag);
                 }
@@ -148,7 +148,7 @@ class Git {
                 const split = commit.split(' ');
                 const hash = split[0];
                 const message = split.slice(1).join(' ').trim();
-                if (this.settings.filterRegex && RegExp(this.settings.filterRegex).test(message)) {
+                if (this.settings.filterRegex && this.settings.filterRegex.test(message)) {
                     return;
                 }
                 commits.push(new GitCommit(hash, message));
@@ -299,8 +299,9 @@ function initSettings() {
     return __awaiter(this, void 0, void 0, function* () {
         const settings = {};
         settings.gitPath = yield io.which('git', true);
-        settings.tagRegex = core.getInput('tag-regex') || '';
-        settings.filterRegex = core.getInput('filter-regex') || '';
+        const caseInsensitive = core.getInput('case-insensitive-regex');
+        settings.tagRegex = RegExp(core.getInput('tag-regex'), caseInsensitive);
+        settings.filterRegex = RegExp(core.getInput('filter-regex'), caseInsensitive);
         settings.changelogFilePath = core.getInput('changelog-file-path') || 'CHANGELOG.md';
         return settings;
     });

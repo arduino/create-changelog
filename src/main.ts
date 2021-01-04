@@ -1,8 +1,7 @@
 import * as core from '@actions/core'
-import * as io from '@actions/io'
 import {Changelog} from './changelog'
 import {Git} from './git'
-import {initSettings, Settings} from './settings'
+import {initSettings} from './settings'
 
 async function run(): Promise<void> {
   try {

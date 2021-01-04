@@ -5,9 +5,9 @@ export interface Settings {
   // Path to git executable
   gitPath: string
   // Regex to select git tags used as boundaries for the changelog
-  tagRegex: string | RegExp
+  tagRegex: RegExp
   // Regex to filter out commit messages from the changelog
-  filterRegex: string | RegExp
+  filterRegex: RegExp
   // Destination file of the generated changelog
   changelogFilePath: string
 }
@@ -15,8 +15,9 @@ export interface Settings {
 export async function initSettings(): Promise<Settings> {
   const settings = {} as Settings
   settings.gitPath = await io.which('git', true)
-  settings.tagRegex = core.getInput('tag-regex') || ''
-  settings.filterRegex = core.getInput('filter-regex') || ''
+  const caseInsensitive = core.getInput('case-insensitive-regex')
+  settings.tagRegex = RegExp(core.getInput('tag-regex'), caseInsensitive)
+  settings.filterRegex = RegExp(core.getInput('filter-regex'), caseInsensitive)
   settings.changelogFilePath = core.getInput('changelog-file-path') || 'CHANGELOG.md'
   return settings
 }

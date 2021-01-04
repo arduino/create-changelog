@@ -104,7 +104,7 @@ describe('Git commands', () => {
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.tagRegex = ''
+    settings.tagRegex = /.*/
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
@@ -269,5 +269,29 @@ describe('Git commands', () => {
     expect(log[1].message).toBe('Third commit')
     expect(log[2].hash).toHaveLength(7)
     expect(log[2].message).toBe('First commit')
+  })
+
+  it('Verifies log does not contain commit matching case insensitive regex', async () => {
+    const cwd = await initTestRepo()
+    process.chdir(cwd)
+
+    const settings = {} as Settings
+    settings.gitPath = await io.which('git', true)
+    settings.filterRegex = /^\[SkIp\].*/i
+    const g = new Git(settings)
+
+    await createAndCommitFile('first', 'First commit', cwd)
+    await createAndCommitFile('second', '[Skip] Second commit', cwd)
+    await createAndCommitFile('third', '[skip] Third commit', cwd)
+    await createAndCommitFile('fourth', 'Fourth commit', cwd)
+    await createAndCommitFile('fifth', '[sKiP] Fifth commit', cwd)
+    await createAndCommitFile('sixth', '[SKIP] Sixth commit', cwd)
+
+    const log = await g.log('', '')
+    expect(log).toHaveLength(2)
+    expect(log[0].hash).toHaveLength(7)
+    expect(log[0].message).toBe('Fourth commit')
+    expect(log[1].hash).toHaveLength(7)
+    expect(log[1].message).toBe('First commit')
   })
 })

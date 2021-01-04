@@ -19,7 +19,7 @@ export class Git {
     // In case there are multiple tags get the first valid version tag
     if (this.settings.tagRegex) {
       res.stdout.forEach(tag => {
-        if (RegExp(this.settings.tagRegex).test(tag)) {
+        if (this.settings.tagRegex.test(tag)) {
           return tag
         }
       })
@@ -40,7 +40,7 @@ export class Git {
 
     if (this.settings.tagRegex) {
       const foundTag = res.stdout[0]
-      if (!RegExp(this.settings.tagRegex).test(foundTag)) {
+      if (!this.settings.tagRegex.test(foundTag)) {
         // If previous tag doesn't match the regex keep searching back
         return this.previousTag(foundTag)
       }
@@ -70,7 +70,7 @@ export class Git {
       const hash = split[0]
       const message = split.slice(1).join(' ').trim()
 
-      if (this.settings.filterRegex && RegExp(this.settings.filterRegex).test(message)) {
+      if (this.settings.filterRegex && this.settings.filterRegex.test(message)) {
         return
       }
       commits.push(new GitCommit(hash, message))

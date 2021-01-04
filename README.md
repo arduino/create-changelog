@@ -42,6 +42,15 @@ The action accepts some properties:
           changelog-file-path: 'MyChangelog.md'
 ```
 
+- `case-insensitive-regex` to make both `tag-regex` and `filter-regex` case insensitive, defaults to `true`.
+
+```
+      - name: Create Changelog
+        uses: arduino/create-changelog@v1
+        with:
+          case-insensitive-regex: true
+```
+
 ## Development
 
 To work on the codebase you have to install all the dependencies:

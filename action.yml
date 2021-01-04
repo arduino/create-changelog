@@ -10,10 +10,13 @@ branding:
 inputs:
   tag-regex:
     description: 'Regex to select git tags used as boundaries for the changelog.'
-    default: ''
+    default: '.*'
   filter-regex:
     description: 'Regex to filter out commit messages from the changelog.'
-    default: ''
+    default: '.*'
   changelog-file-path:
     description: 'Destination file of the generated changelog.'
     default: 'CHANGELOG.md'
+  case-insensitive-regex:
+    description: 'If true both tag-regex and filter-regex are case insensitive'
+    default: true

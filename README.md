@@ -42,7 +42,7 @@ The action accepts some properties:
           changelog-file-path: 'MyChangelog.md'
 ```
 
-- `case-insensitive-regex` to make both `tag-regex` and `filter-regex` case insensitive, defaults to `true`.
+- `case-insensitive-regex` to make both `tag-regex` and `filter-regex` case insensitive, defaults to `false`.
 
 ```
       - name: Create Changelog

@@ -19,4 +19,4 @@ inputs:
     default: 'CHANGELOG.md'
   case-insensitive-regex:
     description: 'If true both tag-regex and filter-regex are case insensitive'
-    default: true
+    default: false

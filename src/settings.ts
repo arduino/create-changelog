@@ -15,9 +15,12 @@ export interface Settings {
 export async function initSettings(): Promise<Settings> {
   const settings = {} as Settings
   settings.gitPath = await io.which('git', true)
-  const caseInsensitive = core.getInput('case-insensitive-regex')
-  settings.tagRegex = RegExp(core.getInput('tag-regex'), caseInsensitive)
-  settings.filterRegex = RegExp(core.getInput('filter-regex'), caseInsensitive)
+  let regexFlag = ''
+  if (core.getInput('case-insensitive-regex') === 'true') {
+    regexFlag = 'i'
+  }
+  settings.tagRegex = RegExp(core.getInput('tag-regex'), regexFlag)
+  settings.filterRegex = RegExp(core.getInput('filter-regex'), regexFlag)
   settings.changelogFilePath = core.getInput('changelog-file-path') || 'CHANGELOG.md'
   return settings
 }

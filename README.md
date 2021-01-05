@@ -59,7 +59,7 @@ To work on the codebase you have to install all the dependencies:
 # npm install
 ```
 
-To run tests set the environment variable `GITHUB_TOKEN` with a valid Personal Access Token and then:
+To run tests:
 
 ```sh
 # npm run test

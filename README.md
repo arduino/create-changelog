@@ -1,4 +1,4 @@
-# Create Changelog
+# Create Changelog!
 
 [![Actions Status](https://github.com/arduino/create-changelog/workflows/Test%20Action/badge.svg)](https://github.com/arduino/create-changelog/actions)
 

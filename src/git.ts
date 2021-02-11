@@ -18,13 +18,16 @@ export class Git {
 
     // In case there are multiple tags get the first valid version tag
     if (this.settings.tagRegex) {
+      let foundTag = ''
       res.stdout.forEach(tag => {
         if (this.settings.tagRegex.test(tag)) {
-          return tag
+          foundTag = tag
+          return
         }
       })
-      // No tag matched
-      return ''
+
+      // Return either matched tag or none
+      return foundTag
     }
     // Get the first tag we found if there's no tag regex
     return res.stdout[0]

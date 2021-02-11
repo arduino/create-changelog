@@ -72,7 +72,7 @@ describe('Git commands', () => {
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.tagRegex = /[0-9]+\.[0-9]+\.[0-9]+.*/
+    settings.tagRegex = RegExp('[0-9]+.[0-9]+.[0-9]+.*', 'i')
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
@@ -88,7 +88,7 @@ describe('Git commands', () => {
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.tagRegex = /[0-9]+\.[0-9]+\.[0-9]+.*/
+    settings.tagRegex = RegExp('[0-9]+.[0-9]+.[0-9]+.*', 'i')
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
@@ -104,7 +104,7 @@ describe('Git commands', () => {
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.tagRegex = /.*/
+    settings.tagRegex = RegExp('.*', 'i')
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
@@ -122,7 +122,7 @@ describe('Git commands', () => {
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.tagRegex = /[0-9]+\.[0-9]+\.[0-9]+.*/
+    settings.tagRegex = RegExp('[0-9]+.[0-9]+.[0-9]+.*', 'i')
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
@@ -140,7 +140,7 @@ describe('Git commands', () => {
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.tagRegex = /[0-9]+\.[0-9]+\.[0-9]+.*/
+    settings.tagRegex = RegExp('[0-9]+.[0-9]+.[0-9]+.*', 'i')
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
@@ -251,7 +251,7 @@ describe('Git commands', () => {
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.filterRegex = /^\[skip\].*/
+    settings.filterRegex = RegExp('^\\[skip\\].*', 'i')
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
@@ -277,7 +277,7 @@ describe('Git commands', () => {
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.filterRegex = /^\[SkIp\].*/i
+    settings.filterRegex = RegExp('^\\[SkIp\\].*', 'i')
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)

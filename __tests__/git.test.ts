@@ -88,14 +88,14 @@ describe('Git commands', () => {
 
     const settings = {} as Settings
     settings.gitPath = await io.which('git', true)
-    settings.tagRegex = RegExp('[0-9]+.[0-9]+.[0-9]+.*', 'i')
+    settings.tagRegex = RegExp('^[0-9]+.[0-9]+.[0-9]+.*', 'i')
     const g = new Git(settings)
 
     await createAndCommitFile('first', 'First commit', cwd)
     await createTag('0.0.1', cwd)
 
     const tag = await g.currentTag()
-    expect(tag).toEqual('')
+    expect(tag).toEqual('0.0.1')
   })
 
   it('Verifies previous tag is returned', async () => {

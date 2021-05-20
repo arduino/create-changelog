@@ -18,7 +18,7 @@ export class Changelog {
     })
 
     const changelogDir: string = path.parse(this.settings.changelogFilePath).dir
-    if (!fs.existsSync(changelogDir)) {
+    if (changelogDir && !fs.existsSync(changelogDir)) {
       fs.mkdirSync(changelogDir)
     }
 

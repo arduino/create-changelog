@@ -40,7 +40,7 @@ class Changelog {
             lines.push(`${c.hash} ${c.message}`);
         });
         const changelogDir = path.parse(this.settings.changelogFilePath).dir;
-        if (!fs.existsSync(changelogDir)) {
+        if (changelogDir && !fs.existsSync(changelogDir)) {
             fs.mkdirSync(changelogDir);
         }
         fs.writeFileSync(this.settings.changelogFilePath, lines.join('\n'));

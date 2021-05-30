@@ -8,7 +8,29 @@ If no property is set the changelog will be created from the current commit to t
 
 ## Usage
 
+### Environment
+
+#### Working directory
+
 This action is meant to be launched inside a Git repository, thus the current `working-directory` must be set accordingly or it will fail.
+
+#### Checkout depth
+
+Because the changelog is generated from commit history, the action will not work as expected with a shallow fetch of the repository.
+So the [`actions/checkout`](https://github.com/actions/checkout) action's default fetch depth of 1 is not suitable.
+Set that action's [`fetch-depth` input](https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches) to `0` to fetch the full commit history:
+
+```yaml
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Create Changelog
+        uses: arduino/create-changelog@v1
+```
+
+### Inputs
 
 The action accepts some properties:
 

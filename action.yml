@@ -2,7 +2,7 @@ name: 'Create changelog'
 description: 'Generates a changelog from a Git repository commit history.'
 author: 'Arduino'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
 branding:
   icon: 'list'

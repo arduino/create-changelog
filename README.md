@@ -2,6 +2,7 @@
 
 [![Actions Status](https://github.com/arduino/create-changelog/workflows/Test%20Action/badge.svg)](https://github.com/arduino/create-changelog/actions)
 [![Check Packaging status](https://github.com/arduino/create-changelog/actions/workflows/check-packaging-ncc-typescript-npm.yml/badge.svg)](https://github.com/arduino/create-changelog/actions/workflows/check-packaging-ncc-typescript-npm.yml)
+[![Integration Tests status](https://github.com/arduino/create-changelog/actions/workflows/test-integration.yml/badge.svg)](https://github.com/arduino/create-changelog/actions/workflows/test-integration.yml)
 
 This actions is an highly opinionated tool that creates changelogs from the git repository commit history.
 

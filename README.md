@@ -77,14 +77,14 @@ The action accepts some properties:
 
 To work on the codebase you have to install all the dependencies:
 
-```sh
-# npm install
+```
+npm install
 ```
 
 To run tests:
 
-```sh
-# npm run test
+```
+npm run test
 ```
 
 See the [official Github documentation][pat-docs] to know more about Personal Access Tokens.

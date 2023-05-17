@@ -73,13 +73,40 @@ The action accepts some properties:
           case-insensitive-regex: true
 ```
 
-## Development
+## Development workflow
+
+### 1. Install tools
+
+#### Node.js
+
+[**npm**](https://www.npmjs.com/) is used for dependency management.
+
+Follow the installation instructions here:<br />
+https://nodejs.dev/download
+
+### 2. Install dependencies
 
 To work on the codebase you have to install all the dependencies:
 
 ```
 npm install
 ```
+
+### 3. Coding
+
+Now you're ready to work some [TypeScript](https://www.typescriptlang.org/) magic!
+
+Make sure to write or update tests for your work when appropriate.
+
+### 4. Format code
+
+Format the code to follow the standard style for the project:
+
+```
+npm run format
+```
+
+### 5. Run tests
 
 To run tests:
 
@@ -89,7 +116,13 @@ npm run test
 
 See the [official Github documentation][pat-docs] to know more about Personal Access Tokens.
 
-## Release
+### 6. Commit
+
+Everything is now ready to make your contribution to the project, so commit it to the repository and submit a pull request.
+
+Thanks!
+
+## Release workflow
 
 1. `npm install` to add all the dependencies, included development.
 2. `npm run build` to build the Action under the `./lib` folder.

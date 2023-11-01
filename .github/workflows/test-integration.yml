@@ -1,0 +1,46 @@
+name: Integration Tests
+
+on:
+  pull_request:
+  push:
+  schedule: # Scheduled trigger checks for breakage caused by changes to create-changelog
+    # run every Tuesday at 3 AM UTC
+    - cron: "0 3 * * 2"
+  # workflow_dispatch event allows the workflow to be triggered manually
+  # See: https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch
+  workflow_dispatch:
+  # repository_dispatch event allows the workflow to be triggered via the GitHub API
+  # See: https://docs.github.com/en/actions/reference/events-that-trigger-workflows#repository_dispatch
+  repository_dispatch:
+
+jobs:
+  defaults:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout local repository
+        uses: actions/checkout@v3
+
+      # Run the action using default values as much as possible.
+      - name: Run action
+        uses: ./ # Use the action from the local path.
+
+  expected-pass:
+    runs-on: ubuntu-latest
+
+    env:
+      CHANGELOG_FILE_PATH: /tmp/CHANGELOG.md
+    steps:
+      - name: Checkout local repository
+        uses: actions/checkout@v3
+
+      - name: Run action
+        uses: ./
+        with:
+          tag-regex: '^[0-9]+\.[0-9]+\.[0-9]+.*$'
+          case-insensitive-regex: true
+          changelog-file-path: "${{ env.CHANGELOG_FILE_PATH }}"
+
+      - name: Verify report file exists
+        run: |
+          [ -e "${{ env.CHANGELOG_FILE_PATH }}" ]

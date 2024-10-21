@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout local repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Run the action using default values as much as possible.
       - name: Run action
@@ -32,7 +32,7 @@ jobs:
       CHANGELOG_FILE_PATH: /tmp/CHANGELOG.md
     steps:
       - name: Checkout local repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Run action
         uses: ./

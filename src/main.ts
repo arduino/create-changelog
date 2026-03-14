@@ -14,7 +14,7 @@ async function run(): Promise<void> {
     const log = await g.log(from, to)
 
     const changelog = new Changelog(settings)
-    await changelog.write(log)
+    changelog.write(log)
   } catch (error) {
     core.setFailed(error.message)
   }

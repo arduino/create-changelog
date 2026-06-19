@@ -24,7 +24,7 @@ Set that action's [`fetch-depth` input](https://github.com/actions/checkout#fetc
 
 ```yaml
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
